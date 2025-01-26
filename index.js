@@ -40,17 +40,25 @@ const addNewGoal = () => {
   // The event listener that removes goals when clicked is not related to this issue.
   // Focus on preventing duplicates for now.
 
-  if (document.getElementById("goalInput").value.trim() === "") {
+  if (goalInput.trim() === "") {
     alert("Add your goal");
+    return;
   } // Avoids empty goal list.
-  if (document.getElementById(goalInput).value.onclick() == "") {
-    event.defaultPrevented();
-    alert("Goal already exists.");
+
+  let goals = goalList.getElementsByTagName("li");
+  let goalListLength = goals.length;
+
+  for (let i = 0; i < goalListLength; i++) {
+    // check if the goal already exists
+  if (goalInput.toLowerCase() === goals[i].textContent.toLowerCase()) {
+    alert(${goalInput} "already exists");
+    return;
   }
-  const newGoal = document.createElement("li");
-  newGoal.textContent = goalInput;
-  goalList.appendChild(newGoal);
-};
+}
+
+const newGoal = document.createElement("li");
+newGoal.textContent = goalInput;
+goalList.appendChild(newGoal);
 
 // Add event listener to the goal submit button
 document.querySelector("#submitGoal").addEventListener("click", addNewGoal);
